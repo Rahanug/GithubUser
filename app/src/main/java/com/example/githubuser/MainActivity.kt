@@ -13,31 +13,19 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel by viewModels<MainViewModel>()
     companion object{
         private const val TAG = "MainActivity"
-        private const val USER_ID = ""
+        private const val USER_ID = "Rahanug"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
-//        mainViewModel.items.observe(this,{items->setItemData(items)})
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvUsers.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        binding.rvUsers.addItemDecoration(itemDecoration)
-        mainViewModel.ListUser.observe(this, {dataUser->setListData(dataUser)})
+        mainViewModel.listUser.observe(this, {dataUser->setListData(dataUser)})
         mainViewModel.isLoading.observe(this,{showLoading(it)})
 
     }
 
     private fun setListData(dataUser: List<ItemsItem>){
-        val listUser = ArrayList<String>()
-        for(user in dataUser){
-            listUser.add(
-                """${user.login}""".trimIndent()
-            )
-        }
-        val adapter = UserAdapter(listUser)
+        val adapter = UserAdapter(dataUser)
         binding.rvUsers.adapter = adapter
 
     }

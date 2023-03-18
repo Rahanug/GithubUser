@@ -3,11 +3,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-//    TEsti
-    @Headers("Authorization: token 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")
-    @GET("https://api.github.com/users/{username}")
+    @Headers("Authorization: token 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")
+    @GET("https://api.github.com/search/users")
     fun getUser(
-        @Path("username") username: String
+        @Query("q") username: String
     ): Call<GithubResponse>
 
 }

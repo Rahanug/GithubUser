@@ -9,18 +9,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-    private val _items = MutableLiveData<ItemsItem>()
-    val items: LiveData<ItemsItem> = _items
+//    private val _items = MutableLiveData<ItemsItem>()
+//    val items: LiveData<ItemsItem> = _items
 
     private val _listUser = MutableLiveData<List<ItemsItem>>()
-    val ListUser : LiveData<List<ItemsItem>> = _listUser
+    val listUser : LiveData<List<ItemsItem>> = _listUser
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     companion object{
         private const val TAG = "MainViewModel"
-        private const val USER_ID = "Rahanug"
+        private  val USER_ID = "R"
+
     }
     init{
         findUser()
@@ -33,12 +34,12 @@ class MainViewModel: ViewModel() {
                 call: Call<GithubResponse>,
                 response: Response<GithubResponse>
             ) {
-                _isLoading.value = false
                 if(response.isSuccessful){
-                    _listUser.value = response.body()?.items as List<ItemsItem>?
+                    _listUser.value = response.body()?.items.orEmpty().toList()
                 }else{
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
+                _isLoading.value = false
             }
 
             override fun onFailure(call: Call<GithubResponse>, t: Throwable) {

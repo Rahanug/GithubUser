@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemRowUserBinding
 
-class UserAdapter(private val listUser: ArrayList<String>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(private val listUser: List<ItemsItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder{
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(binding)
@@ -16,12 +16,13 @@ class UserAdapter(private val listUser: ArrayList<String>) : RecyclerView.Adapte
 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        val(name, description, photo) = listUser[position]
-        viewHolder.binding.tvItemName.text = listUser[position]
-//        viewHolder.binding.tvItemDescription.text = description
-//        Glide.with(this@MainActivity)
-//            .load("https://api.github.com/users/${name}")
-//            .into(binding.img_item)
+        val user = listUser[position]
+        val name = user.login
+        val avatar = user.avatarUrl
+        viewHolder.binding.tvItemName.text = name
+        Glide.with(viewHolder.itemView.context)
+            .load(avatar)
+            .into(viewHolder.binding.imgItemPhoto)
 
     }
 
