@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class DetailViewModel: ViewModel() {
     private val _dataDetailUser = MutableLiveData<DetailUserResponse>()

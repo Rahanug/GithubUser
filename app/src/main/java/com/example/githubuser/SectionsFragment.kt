@@ -5,22 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.databinding.FragmentSectionsBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SectionsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SectionsFragment : Fragment() {
-    private lateinit var binding: FragmentSectionsBinding
+    private var _binding: FragmentSectionsBinding? = null
+    private val binding get() = _binding
     private lateinit var detailViewModel : DetailViewModel
 
     companion object {
@@ -32,9 +22,8 @@ class SectionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentSectionsBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentSectionsBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,20 +46,27 @@ class SectionsFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun showLoading(isLoading: Boolean){
         if (isLoading){
-            binding.progressBar.visibility = View.VISIBLE
+            binding?.progressBar?.visibility = View.VISIBLE
         }else{
-            binding.progressBar.visibility = View.GONE
+            binding?.progressBar?.visibility = View.GONE
         }
     }
     private fun setFollowData(dataUser: List<ItemsItem>){
         binding.apply {
             val adapter = UserAdapter(dataUser)
-            binding.rvFollow.adapter = adapter
+            binding?.rvFollow?.adapter = adapter
         }
 
     }
+
+
 
 
 }
