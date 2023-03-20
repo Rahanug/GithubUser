@@ -1,5 +1,6 @@
 package com.example.githubuser
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,11 @@ class UserAdapter(private val listUser: List<ItemsItem>) : RecyclerView.Adapter<
         Glide.with(viewHolder.itemView.context)
             .load(avatar)
             .into(viewHolder.binding.imgItemPhoto)
-
+        viewHolder.itemView.setOnClickListener{
+            val intentDetail = Intent(viewHolder.itemView.context, DetailUserActivity::class.java)
+            intentDetail.putExtra(DetailUserActivity.USER_ID, name)
+            viewHolder.itemView.context.startActivity(intentDetail)
+        }
     }
 
     override fun getItemCount() = listUser.size

@@ -9,8 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-//    private val _items = MutableLiveData<ItemsItem>()
-//    val items: LiveData<ItemsItem> = _items
 
     private val _listUser = MutableLiveData<List<ItemsItem>>()
     val listUser : LiveData<List<ItemsItem>> = _listUser
@@ -20,13 +18,13 @@ class MainViewModel: ViewModel() {
 
     companion object{
         private const val TAG = "MainViewModel"
-        private  val USER_ID = "R"
+        private  val USER_ID = "Rahanug"
 
     }
     init{
-        findUser()
+        findUser(USER_ID)
     }
-    private fun findUser(){
+    fun findUser(USER_ID: String){
         _isLoading.value = true
         val client = ApiConfig.getApiService().getUser(USER_ID)
         client.enqueue(object : Callback<GithubResponse>{
