@@ -1,9 +1,12 @@
-package com.example.githubuser
+package com.example.githubuser.model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubuser.networking.api.ApiConfig
+import com.example.githubuser.networking.response.GithubResponse
+import com.example.githubuser.networking.response.ItemsItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

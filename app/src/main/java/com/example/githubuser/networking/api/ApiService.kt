@@ -1,4 +1,7 @@
-package com.example.githubuser
+package com.example.githubuser.networking.api
+import com.example.githubuser.networking.response.DetailUserResponse
+import com.example.githubuser.networking.response.GithubResponse
+import com.example.githubuser.networking.response.ItemsItem
 import retrofit2.Call
 import retrofit2.http.*
 

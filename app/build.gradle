@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'kotlin-parcelize'
 }
 
@@ -17,6 +18,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", '"token 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"')
+        buildConfigField("String", "API_URL", '"https://api.github.com/"')
     }
 
     buildTypes {
@@ -35,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation 'javax.inject:javax.inject:1'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.loopj.android:android-async-http:1.4.9'
@@ -51,4 +55,12 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.room:room-runtime:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
 }

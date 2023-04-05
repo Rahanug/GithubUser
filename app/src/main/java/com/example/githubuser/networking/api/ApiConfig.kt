@@ -1,5 +1,5 @@
-package com.example.githubuser
-
+package com.example.githubuser.networking.api
+import com.example.githubuser.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -7,11 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
+        private val mySuperSecretKey: String = BuildConfig.API_KEY
+        private val mySuperUrl: String = BuildConfig.API_URL
         fun getApiService(): ApiService {
             val authInterceptor = Interceptor{chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "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")
+                    .addHeader("Authorization", mySuperSecretKey)
                     .build()
                 chain.proceed(requestHeaders)
             }
@@ -19,7 +21,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(mySuperUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

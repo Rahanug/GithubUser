@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.ui.main
 
 import android.app.SearchManager
 import android.content.Context
@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.ActivityMainBinding
 import androidx.appcompat.widget.SearchView
+import com.example.githubuser.model.MainViewModel
+import com.example.githubuser.R
+import com.example.githubuser.ui.adapter.UserAdapter
+import com.example.githubuser.networking.response.ItemsItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

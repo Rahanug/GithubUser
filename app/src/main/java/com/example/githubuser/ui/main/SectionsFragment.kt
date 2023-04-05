@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.databinding.FragmentSectionsBinding
+import com.example.githubuser.networking.response.ItemsItem
+import com.example.githubuser.ui.adapter.UserAdapter
+import com.example.githubuser.model.DetailViewModel
 
 class SectionsFragment : Fragment() {
     private var _binding: FragmentSectionsBinding? = null

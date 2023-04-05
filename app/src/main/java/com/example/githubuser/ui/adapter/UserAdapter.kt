@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemRowUserBinding
+import com.example.githubuser.networking.response.ItemsItem
+import com.example.githubuser.ui.main.DetailUserActivity
 
 class UserAdapter(private val listUser: List<ItemsItem>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder{
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(binding)
     }
