@@ -2,8 +2,6 @@ package com.example.githubuser.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,7 +14,7 @@ import com.example.githubuser.database.User
 import com.example.githubuser.database.ViewModelFactory
 import com.example.githubuser.ui.adapter.SectionPagerAdapter
 import com.example.githubuser.databinding.ActivityDetailUserBinding
-import com.example.githubuser.model.DetailViewModel
+import com.example.githubuser.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -25,16 +23,8 @@ class DetailUserActivity : AppCompatActivity() {
     private val detailViewModel by viewModels<DetailViewModel>() {
         ViewModelFactory.getInstance(application)
     }
+    private lateinit var user: User
 
-    companion object {
-        val USER_ID = ""
-
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +44,12 @@ class DetailUserActivity : AppCompatActivity() {
         if (nameUser == null) return
         binding.detailNameUser.text = nameUser
         detailViewModel.getDataUser(nameUser)
+        detailViewModel.dataDetailUser.observe(this, { dataUser ->
+            setDetailUser(dataUser)
+
+        })
         detailViewModel.getByUsername(nameUser).observe(this, { userFavorite ->
             if (userFavorite != null) {
-                setDetailUser(userFavorite)
                 binding.favoriteDrawable.setImageDrawable(
                     ContextCompat.getDrawable(
                         this@DetailUserActivity,
@@ -64,12 +57,6 @@ class DetailUserActivity : AppCompatActivity() {
                     )
                 )
                 binding.favoriteDrawable.setOnClickListener {
-                    binding.favoriteDrawable.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            this@DetailUserActivity,
-                            R.drawable.ic_favorite_border_24
-                        )
-                    )
                     detailViewModel.deleteFavorite(userFavorite.login)
                     Toast.makeText(this, "User is deleted", Toast.LENGTH_SHORT).show()
                 }
@@ -80,46 +67,40 @@ class DetailUserActivity : AppCompatActivity() {
                         R.drawable.ic_favorite_border_24
                     )
                 )
-                detailViewModel.dataDetailUser.observe(this, { dataUser ->
-                    setDetailUser(dataUser)
-                    binding.favoriteDrawable.setOnClickListener {
-                        setFavoriteBookmarked(dataUser)
-                    }
-                })
+                binding.favoriteDrawable.setOnClickListener {
+                    detailViewModel.addFavorite(user)
+                    Toast.makeText(this, "User is Added", Toast.LENGTH_SHORT).show()
+                }
+
             }
         })
-        detailViewModel.isLoading.observe(this, { showLoading(it) })
+        detailViewModel.isLoadingDetail.observe(this, { showLoading(it) })
 
     }
 
     private fun setDetailUser(dataUser: User) {
-        binding.detailNameUser.text = dataUser.login.toString()
-        binding.detailNicknameUser.text = dataUser.name.toString()
-        binding.detailFollower.text = dataUser.followers.toString() + " Follower"
-        binding.detailFollowing.text = dataUser.following.toString() + " Following"
-        Glide.with(this@DetailUserActivity)
-            .load(dataUser.avatarUrl)
-            .into(binding.profileImage)
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
+        user = dataUser
+        binding.apply {
+            detailNameUser.text = dataUser.login
+            detailNicknameUser.text = dataUser.name.orEmpty()
+            detailFollower.text = resources.getString(R.string.user_follower, dataUser.followers.orEmpty())
+            detailFollowing.text = resources.getString(R.string.user_following, dataUser.following.orEmpty())
+            Glide.with(this@DetailUserActivity)
+                .load(dataUser.avatarUrl)
+                .into(profileImage)
         }
+
     }
 
-    private fun setFavoriteBookmarked(user: User) {
-        binding.favoriteDrawable.setImageDrawable(
-            ContextCompat.getDrawable(
-                this@DetailUserActivity,
-                R.drawable.ic__favorite_24
-            )
+    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
+
+    companion object {
+        val USER_ID = ""
+
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
         )
-        detailViewModel.addFavorite(user)
-        Toast.makeText(this, "User is added", Toast.LENGTH_SHORT).show()
-
     }
-
 }

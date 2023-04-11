@@ -3,7 +3,7 @@ package com.example.githubuser.database
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.model.DetailViewModel
+import com.example.githubuser.viewmodel.DetailViewModel
 import com.example.githubuser.utils.Injection
 
 class ViewModelFactory private constructor(private val favoriteRepository: FavoriteRepository):

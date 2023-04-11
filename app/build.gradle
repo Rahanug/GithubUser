@@ -18,7 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_KEY", '"token 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"')
+        buildConfigField("String", "API_KEY", '"token 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"')
         buildConfigField("String", "API_URL", '"https://api.github.com/"')
     }
 
@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation 'javax.inject:javax.inject:1'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -50,7 +53,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

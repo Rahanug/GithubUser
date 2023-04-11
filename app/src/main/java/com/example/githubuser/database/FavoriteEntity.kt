@@ -13,4 +13,4 @@ data class FavoriteEntity(
 
     @field:ColumnInfo(name = "avatar_url")
     val avatarUrl: String,
-)
+    )

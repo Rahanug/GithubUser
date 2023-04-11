@@ -9,17 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.databinding.FragmentSectionsBinding
 import com.example.githubuser.networking.response.ItemsItem
 import com.example.githubuser.ui.adapter.UserAdapter
-import com.example.githubuser.model.DetailViewModel
+import com.example.githubuser.viewmodel.DetailViewModel
 
 class SectionsFragment : Fragment() {
     private var _binding: FragmentSectionsBinding? = null
     private val binding get() = _binding
     private lateinit var detailViewModel : DetailViewModel
 
-    companion object {
-        const val ARG_POSITION = " "
-        const val ARG_USERNAME = ""
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +29,7 @@ class SectionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var position: Int? = 0
         var username: String? = null
-        detailViewModel = ViewModelProvider(requireActivity()).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             position = it.getInt(ARG_POSITION)
@@ -41,11 +38,11 @@ class SectionsFragment : Fragment() {
         if (position == 1){
             username?.let{detailViewModel.getDataFollower(it)}
             detailViewModel.dataFollowerUser.observe(viewLifecycleOwner, {setFollowData(it)})
-            detailViewModel.isLoading.observe(viewLifecycleOwner,{showLoading(it)})
+            detailViewModel.isLoadingFollower.observe(viewLifecycleOwner,{showLoading(it)})
         } else {
             username?.let{detailViewModel.getDataFollowing(it)}
             detailViewModel.dataFollowingUser.observe(viewLifecycleOwner, {dataUser->setFollowData(dataUser)})
-            detailViewModel.isLoading.observe(viewLifecycleOwner,{showLoading(it)})
+            detailViewModel.isLoadingFollowing.observe(viewLifecycleOwner,{showLoading(it)})
         }
     }
 
@@ -54,13 +51,8 @@ class SectionsFragment : Fragment() {
         _binding = null
     }
 
-    private fun showLoading(isLoading: Boolean){
-        if (isLoading){
-            binding?.progressBar?.visibility = View.VISIBLE
-        }else{
-            binding?.progressBar?.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding?.progressBar?.visibility = if (state) View.VISIBLE else View.GONE }
+
     private fun setFollowData(dataUser: List<ItemsItem>){
         binding.apply {
             val adapter = UserAdapter(dataUser)
@@ -69,7 +61,10 @@ class SectionsFragment : Fragment() {
 
     }
 
-
+    companion object {
+        const val ARG_POSITION = " "
+        const val ARG_USERNAME = ""
+    }
 
 
 }
