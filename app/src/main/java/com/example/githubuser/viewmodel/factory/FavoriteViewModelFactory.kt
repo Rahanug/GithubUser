@@ -1,9 +1,10 @@
-package com.example.githubuser.database
+package com.example.githubuser.viewmodel.factory
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.viewmodel.FavoriteViewModel
+import com.example.githubuser.database.repository.FavoriteRepository
+import com.example.githubuser.viewmodel.main.FavoriteViewModel
 import com.example.githubuser.utils.Injection
 
 class FavoriteViewModelFactory private constructor(private val favoriteRepository: FavoriteRepository):

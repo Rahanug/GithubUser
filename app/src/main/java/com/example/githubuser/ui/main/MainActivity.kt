@@ -16,13 +16,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.viewmodel.MainViewModel
+import com.example.githubuser.viewmodel.main.MainViewModel
 import com.example.githubuser.R
-import com.example.githubuser.database.SettingViewModelFactory
+import com.example.githubuser.viewmodel.factory.SettingViewModelFactory
 import com.example.githubuser.ui.adapter.UserAdapter
 import com.example.githubuser.networking.response.ItemsItem
 import com.example.githubuser.ui.preferences.SettingPreferences
-import com.example.githubuser.viewmodel.SettingViewModel
+import com.example.githubuser.viewmodel.main.SettingViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

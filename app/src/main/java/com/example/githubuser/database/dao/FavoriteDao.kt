@@ -1,7 +1,8 @@
-package com.example.githubuser.database
+package com.example.githubuser.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.githubuser.database.entity.FavoriteEntity
 
 @Dao
 interface FavoriteDao {

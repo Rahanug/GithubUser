@@ -1,4 +1,4 @@
-package com.example.githubuser.database
+package com.example.githubuser.database.entity
 
 
 data class User (

@@ -10,11 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
-import com.example.githubuser.database.User
-import com.example.githubuser.database.ViewModelFactory
+import com.example.githubuser.database.entity.User
+import com.example.githubuser.viewmodel.factory.ViewModelFactory
 import com.example.githubuser.ui.adapter.SectionPagerAdapter
 import com.example.githubuser.databinding.ActivityDetailUserBinding
-import com.example.githubuser.viewmodel.DetailViewModel
+import com.example.githubuser.viewmodel.main.DetailViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

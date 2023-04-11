@@ -1,9 +1,9 @@
-package com.example.githubuser.viewmodel
+package com.example.githubuser.viewmodel.main
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.githubuser.database.FavoriteRepository
-import com.example.githubuser.database.User
+import com.example.githubuser.database.repository.FavoriteRepository
+import com.example.githubuser.database.entity.User
 import com.example.githubuser.networking.api.ApiConfig
 import com.example.githubuser.networking.response.DetailUserResponse
 import com.example.githubuser.networking.response.ItemsItem

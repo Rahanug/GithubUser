@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.githubuser.databinding.FragmentSectionsBinding
 import com.example.githubuser.networking.response.ItemsItem
 import com.example.githubuser.ui.adapter.UserAdapter
-import com.example.githubuser.viewmodel.DetailViewModel
+import com.example.githubuser.viewmodel.main.DetailViewModel
 
 class SectionsFragment : Fragment() {
     private var _binding: FragmentSectionsBinding? = null
